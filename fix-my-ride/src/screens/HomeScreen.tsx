@@ -10,7 +10,7 @@ import {
   Platform,
   StatusBar,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { 
   Wrench, 
   User, 
@@ -30,7 +30,9 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BottomTabNavigation from '../../navigation/BottomNavigation';
+import BottomTabNavigation from '../navigation/BottomNavigation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/AppNavigator';
 
 const { width } = Dimensions.get('window');
 
@@ -47,7 +49,7 @@ const stats = [
 ];
 
 export default function HomeScreen() {
-  const router = useRouter();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const pulseAnim = useRef(new Animated.Value(1)).current;
   const notificationDot = useRef(new Animated.Value(0)).current;
 
@@ -116,7 +118,7 @@ export default function HomeScreen() {
               </View>
               <View style={styles.headerButtons}>
                 <TouchableOpacity
-                  onPress={() => router.push('/notifications')}
+                  onPress={() => navigation.navigate('Notifications')}
                   style={styles.iconButton}
                   activeOpacity={0.7}
                 >
@@ -129,7 +131,7 @@ export default function HomeScreen() {
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => router.push('/profile')}
+                  onPress={() => navigation.navigate("MainTabs", { screen: "ProfileTab" })}
                   style={styles.iconButton}
                   activeOpacity={0.7}
                 >
@@ -142,7 +144,6 @@ export default function HomeScreen() {
             <TouchableOpacity
               style={styles.locationCard}
               activeOpacity={0.8}
-              onPress={() => router.push('/location')}
             >
               <BlurView intensity={20} tint="light" style={styles.locationContent}>
                 <View style={styles.locationIcon}>
@@ -187,7 +188,7 @@ export default function HomeScreen() {
                 </View>
 
                 <TouchableOpacity
-                  onPress={() => router.push('/request-service')}
+                  onPress={() => navigation.navigate('RequestService' as never)}
                   style={styles.emergencyButton}
                   activeOpacity={0.9}
                 >
@@ -216,7 +217,7 @@ export default function HomeScreen() {
                   return (
                     <TouchableOpacity
                       key={shortcut.id}
-                      onPress={() => router.push('/request-service')}
+                      onPress={() => navigation.navigate('RequestService' as never)}
                       style={styles.shortcutCard}
                       activeOpacity={0.7}
                     >
@@ -241,7 +242,6 @@ export default function HomeScreen() {
             <TouchableOpacity
               style={styles.mapCard}
               activeOpacity={0.8}
-              onPress={() => router.push('/map')}
             >
               <LinearGradient
                 colors={['#f8fafc', '#e2e8f0']}

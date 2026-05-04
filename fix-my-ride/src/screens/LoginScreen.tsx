@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -12,22 +12,24 @@ import {
   Dimensions,
   StatusBar,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { Phone, Globe } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/AppNavigator';
 
 const { width, height } = Dimensions.get('window');
 
 export default function LoginScreen() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-  const router = useRouter();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(50)).current;
 
-  useState(() => {
+  useEffect(() => {
     Animated.parallel([
       Animated.timing(fadeAnim, {
         toValue: 1,
@@ -40,12 +42,11 @@ export default function LoginScreen() {
         useNativeDriver: true,
       }),
     ]).start();
-  });
+  }, []);
 
   const handleLogin = () => {
-    // Add phone number validation here
     if (phoneNumber.length >= 10) {
-      router.push('/home');
+      navigation.navigate('MainTabs', { screen: 'HomeTab' });
     }
   };
 

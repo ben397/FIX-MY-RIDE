@@ -10,7 +10,9 @@ import {
   StatusBar,
   Easing,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/AppNavigator';
+import { useNavigation } from '@react-navigation/native';
 import { 
   MapPin, 
   Clock, 
@@ -25,7 +27,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BottomTabNavigation from '../../navigation/BottomNavigation';
+import BottomTabNavigation from '../navigation/BottomNavigation';
 
 const activeRequests = [
   {
@@ -50,7 +52,7 @@ const pendingRequests = [
 ];
 
 export default function RequestsScreen() {
-  const router = useRouter();
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(50)).current;
   const spinValue = useRef(new Animated.Value(0)).current;
@@ -107,7 +109,7 @@ export default function RequestsScreen() {
         You don't have any ongoing services
       </Text>
       <TouchableOpacity
-        onPress={() => router.push('/request-service')}
+        onPress={() => navigation.navigate('RequestService', { issueType: 'Engine', isEmergency: false })}
         style={styles.emptyButton}
         activeOpacity={0.8}
       >
@@ -263,7 +265,7 @@ export default function RequestsScreen() {
                       {/* Action Buttons */}
                       <View style={styles.actionButtons}>
                         <TouchableOpacity
-                          onPress={() => router.push('/tracking')}
+                          onPress={() => navigation.navigate('Tracking' as never)}
                           style={styles.trackButton}
                           activeOpacity={0.8}
                         >
