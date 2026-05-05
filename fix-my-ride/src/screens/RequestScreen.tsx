@@ -27,7 +27,6 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BottomTabNavigation from '../navigation/BottomNavigation';
 
 const activeRequests = [
   {
@@ -64,7 +63,7 @@ export default function RequestsScreen() {
         toValue: 1,
         duration: 2000,
         easing: Easing.linear,
-        useNativeDriver: true,
+        useNativeDriver: false,
       })
     ).start();
 
@@ -73,12 +72,12 @@ export default function RequestsScreen() {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 600,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
         duration: 600,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
   }, []);
@@ -391,7 +390,6 @@ export default function RequestsScreen() {
           </View>
         </ScrollView>
 
-        <BottomTabNavigation />
       </View>
     </SafeAreaView>
   );

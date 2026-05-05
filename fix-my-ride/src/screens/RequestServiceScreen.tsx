@@ -104,12 +104,12 @@ export default function RequestServiceScreen() {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
 
@@ -120,12 +120,12 @@ export default function RequestServiceScreen() {
           Animated.timing(pulseAnim, {
             toValue: 1.05,
             duration: 800,
-            useNativeDriver: true,
+            useNativeDriver: false,
           }),
           Animated.timing(pulseAnim, {
             toValue: 1,
             duration: 800,
-            useNativeDriver: true,
+            useNativeDriver: false,
           }),
         ])
       ).start();
@@ -149,12 +149,12 @@ export default function RequestServiceScreen() {
         Animated.timing(buttonScale, {
           toValue: 1.1,
           duration: 200,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(buttonScale, {
           toValue: 1,
           duration: 200,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ]).start();
     } catch (error) {
@@ -170,12 +170,12 @@ export default function RequestServiceScreen() {
         Animated.timing(buttonScale, {
           toValue: 0.95,
           duration: 100,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(buttonScale, {
           toValue: 1,
           duration: 100,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ]).start(() => {
         navigation.navigate('Matching', {

@@ -92,12 +92,12 @@ export default function VehicleManagementScreen() {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 600,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
         duration: 600,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
 
@@ -110,7 +110,7 @@ export default function VehicleManagementScreen() {
         toValue: 0,
         friction: 8,
         tension: 40,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     } else {
       formSlideAnim.setValue(300);
@@ -195,12 +195,12 @@ export default function VehicleManagementScreen() {
       Animated.spring(deleteScale, {
         toValue: 0.9,
         friction: 3,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.spring(deleteScale, {
         toValue: 1,
         friction: 3,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
 

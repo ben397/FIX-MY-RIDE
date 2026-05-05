@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { View, Text } from 'react-native';
 
 // Navigators
 import TabNavigator, { TabParamList } from '../navigation/BottomNavigation';
@@ -39,6 +40,11 @@ export type RootStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
+const TestTabs = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Navigation works!</Text>
+  </View>
+);
 
 export default function AppNavigator() {
 

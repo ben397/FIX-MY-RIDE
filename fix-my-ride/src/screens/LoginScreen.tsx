@@ -1,3 +1,4 @@
+// LoginScreen.tsx - Fixed navigation
 import { useState, useRef, useEffect } from 'react';
 import {
   View,
@@ -11,21 +12,28 @@ import {
   Animated,
   Dimensions,
   StatusBar,
+  Alert,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Phone, Globe } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
+import Svg, { Path } from 'react-native-svg';
 
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 export default function LoginScreen() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [isFocused, setIsFocused] = useState(false);
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const [isLoading, setIsLoading] = useState(false);
+  
+  // Use proper typing for navigation
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList, 'Login'>>();
+  
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(50)).current;
 
@@ -34,21 +42,49 @@ export default function LoginScreen() {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
   }, []);
 
   const handleLogin = () => {
-    if (phoneNumber.length >= 10) {
-      navigation.navigate('MainTabs', { screen: 'HomeTab' });
+    const cleanedNumber = phoneNumber.replace(/\D/g, '');
+    
+    if (cleanedNumber.length < 10) {
+      Alert.alert('Invalid Number', 'Please enter a valid 10-digit phone number');
+      return;
     }
+
+    setIsLoading(true);
+
+    // Simulate OTP sending
+    setTimeout(() => {
+      setIsLoading(false);
+      console.log('Navigating to MainTabs...');
+      
+      // Navigate to MainTabs - this matches your RootStackParamList
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'MainTabs' }],
+      });
+    }, 1500);
   };
+
+  const handleGoogleLogin = () => {
+    Alert.alert('Coming Soon', 'Google login will be available soon!');
+  };
+
+  const handleAppleLogin = () => {
+    Alert.alert('Coming Soon', 'Apple login will be available soon!');
+  };
+
+  const digitsOnly = phoneNumber.replace(/\D/g, '');
+  const isValidNumber = digitsOnly.length >= 10;
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -61,6 +97,7 @@ export default function LoginScreen() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
           bounces={false}
+          keyboardShouldPersistTaps="handled"
         >
           {/* Top Decorative Element */}
           <LinearGradient
@@ -106,7 +143,6 @@ export default function LoginScreen() {
                     style={styles.input}
                     value={phoneNumber}
                     onChangeText={(text) => {
-                      // Format phone number
                       const cleaned = text.replace(/\D/g, '');
                       let formatted = cleaned;
                       if (cleaned.length > 3 && cleaned.length <= 6) {
@@ -123,6 +159,9 @@ export default function LoginScreen() {
                     onFocus={() => setIsFocused(true)}
                     onBlur={() => setIsFocused(false)}
                     selectionColor="#6366f1"
+                    editable={!isLoading}
+                    returnKeyType="done"
+                    onSubmitEditing={handleLogin}
                   />
                 </View>
                 <View style={styles.inputHint}>
@@ -137,10 +176,11 @@ export default function LoginScreen() {
                 onPress={handleLogin}
                 activeOpacity={0.8}
                 style={styles.buttonContainer}
+                disabled={isLoading || !isValidNumber}
               >
                 <LinearGradient
                   colors={
-                    phoneNumber.length >= 10
+                    isValidNumber && !isLoading
                       ? ['#6366f1', '#8b5cf6']
                       : ['#cbd5e1', '#94a3b8']
                   }
@@ -148,10 +188,16 @@ export default function LoginScreen() {
                   end={{ x: 1, y: 0 }}
                   style={styles.gradientButton}
                 >
-                  <Text style={styles.buttonText}>Send OTP</Text>
-                  <View style={styles.buttonArrow}>
-                    <Text style={styles.arrowText}>→</Text>
-                  </View>
+                  {isLoading ? (
+                    <ActivityIndicator size="small" color="#ffffff" />
+                  ) : (
+                    <>
+                      <Text style={styles.buttonText}>Send OTP</Text>
+                      <View style={styles.buttonArrow}>
+                        <Text style={styles.arrowText}>→</Text>
+                      </View>
+                    </>
+                  )}
                 </LinearGradient>
               </TouchableOpacity>
 
@@ -169,6 +215,8 @@ export default function LoginScreen() {
                 <TouchableOpacity
                   style={styles.socialButton}
                   activeOpacity={0.7}
+                  onPress={handleGoogleLogin}
+                  disabled={isLoading}
                 >
                   <BlurView intensity={20} tint="light" style={styles.blurButton}>
                     <Globe size={22} color="#4285f4" />
@@ -179,10 +227,14 @@ export default function LoginScreen() {
                 <TouchableOpacity
                   style={styles.socialButton}
                   activeOpacity={0.7}
+                  onPress={handleAppleLogin}
+                  disabled={isLoading}
                 >
                   <BlurView intensity={20} tint="light" style={styles.blurButton}>
                     <View style={styles.appleIcon}>
-                      <Text style={styles.appleText}></Text>
+                      <Svg width={22} height={22} viewBox="0 0 24 24" fill="#000000">
+                        <Path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98l-.09.06c-.22.14-2.15 1.28-2.13 3.81.03 3.02 2.65 4.03 2.68 4.04l-.1.27zM13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                      </Svg>
                     </View>
                     <Text style={styles.socialButtonText}>Apple</Text>
                   </BlurView>

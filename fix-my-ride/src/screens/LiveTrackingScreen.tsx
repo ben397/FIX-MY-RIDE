@@ -56,12 +56,12 @@ export default function LiveTrackingScreen() {
         Animated.timing(pulseAnim, {
           toValue: 1.3,
           duration: 1000,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(pulseAnim, {
           toValue: 1,
           duration: 1000,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ])
     );
@@ -89,7 +89,7 @@ export default function LiveTrackingScreen() {
             toValue: 1,
             friction: 3,
             tension: 40,
-            useNativeDriver: true,
+            useNativeDriver: false,
           }).start();
           
           setTimeout(() => {

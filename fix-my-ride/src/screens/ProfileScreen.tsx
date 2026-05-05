@@ -33,9 +33,7 @@ import {
   Wrench,
 } from 'lucide-react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BottomTabNavigation from '../navigation/BottomNavigation';
 
 const { width } = Dimensions.get('window');
 
@@ -109,12 +107,12 @@ export default function ProfileScreen() {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
 
@@ -124,12 +122,12 @@ export default function ProfileScreen() {
         Animated.timing(profileScale, {
           toValue: 1.05,
           duration: 2000,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(profileScale, {
           toValue: 1,
           duration: 2000,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ])
     ).start();
@@ -139,11 +137,11 @@ export default function ProfileScreen() {
     Animated.sequence([
       Animated.spring(profileScale, {
         toValue: 0.9,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.spring(profileScale, {
         toValue: 1,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
   };
@@ -498,7 +496,6 @@ export default function ProfileScreen() {
           </View>
         </ScrollView>
 
-        <BottomTabNavigation />
       </View>
     </SafeAreaView>
   );

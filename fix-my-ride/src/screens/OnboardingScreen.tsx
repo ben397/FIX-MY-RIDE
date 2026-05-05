@@ -78,18 +78,18 @@ export default function OnboardingScreen() {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 600,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
         duration: 600,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.spring(scaleAnim, {
         toValue: 1,
         friction: 8,
         tension: 40,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
 
@@ -98,7 +98,7 @@ export default function OnboardingScreen() {
       Animated.timing(rotateAnim, {
         toValue: 1,
         duration: 3000,
-        useNativeDriver: true,
+        useNativeDriver: false,
       })
     ).start();
   }, [currentSlide]);
@@ -122,12 +122,12 @@ export default function OnboardingScreen() {
         Animated.timing(fadeAnim, {
           toValue: 1,
           duration: 400,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.spring(scaleAnim, {
           toValue: 1,
           friction: 8,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ]).start();
     } else {

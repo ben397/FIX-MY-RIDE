@@ -29,7 +29,6 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BottomTabNavigation from '../navigation/BottomNavigation';
 
 type FilterType = 'all' | 'completed' | 'cancelled';
 
@@ -91,12 +90,12 @@ export default function HistoryScreen() {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 600,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
         duration: 600,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
   }, []);
@@ -126,11 +125,11 @@ export default function HistoryScreen() {
     Animated.sequence([
       Animated.spring(filterScale, {
         toValue: 0.9,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.spring(filterScale, {
         toValue: 1,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
     
@@ -402,8 +401,6 @@ export default function HistoryScreen() {
             )}
           </View>
         </Animated.ScrollView>
-
-        <BottomTabNavigation />
       </View>
     </SafeAreaView>
   );

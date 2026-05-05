@@ -80,12 +80,12 @@ export default function MechanicAcceptanceScreen() {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
   }, []);
@@ -98,17 +98,17 @@ export default function MechanicAcceptanceScreen() {
       Animated.timing(confirmScale, {
         toValue: 0.95,
         duration: 150,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(confirmScale, {
         toValue: 1.02,
         duration: 200,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(confirmScale, {
         toValue: 1,
         duration: 150,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start(() => {
       navigation.navigate('Tracking', {
@@ -123,11 +123,11 @@ export default function MechanicAcceptanceScreen() {
     Animated.sequence([
       Animated.spring(heartScale, {
         toValue: 1.3,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.spring(heartScale, {
         toValue: 1,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
     

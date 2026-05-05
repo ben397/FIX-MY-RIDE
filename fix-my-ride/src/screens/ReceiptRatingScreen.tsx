@@ -76,12 +76,12 @@ export default function ReceiptRatingScreen() {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
 
@@ -92,7 +92,7 @@ export default function ReceiptRatingScreen() {
         delay: index * 100,
         friction: 4,
         tension: 40,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     });
   }, []);
@@ -105,12 +105,12 @@ export default function ReceiptRatingScreen() {
       Animated.spring(starAnims[star - 1], {
         toValue: 1.3,
         friction: 3,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.spring(starAnims[star - 1], {
         toValue: 1,
         friction: 3,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
   }, [starAnims]);
@@ -153,7 +153,7 @@ export default function ReceiptRatingScreen() {
     Animated.spring(successScale, {
       toValue: isSaved ? 0 : 1,
       friction: 4,
-      useNativeDriver: true,
+      useNativeDriver: false,
     }).start();
   }, [isSaved]);
 
@@ -168,7 +168,7 @@ export default function ReceiptRatingScreen() {
     // Simulate submission
     setTimeout(() => {
       setIsSubmitting(false);
-      navigation.navigate('Home');
+      navigation.navigate('MainTabs');
     }, 1000);
   }, [rating, navigation]);
 

@@ -37,26 +37,26 @@ export default function SplashScreen() {
         Animated.timing(fadeAnim, {
           toValue: 1,
           duration: 800,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.spring(scaleAnim, {
           toValue: 1,
           friction: 4,
           tension: 40,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ]),
       // Slide up the text
       Animated.timing(slideUpAnim, {
         toValue: 0,
         duration: 600,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       // Show dots
       Animated.timing(dotsOpacity, {
         toValue: 1,
         duration: 400,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
 
@@ -66,12 +66,12 @@ export default function SplashScreen() {
         Animated.timing(rotateAnim, {
           toValue: 1,
           duration: 2000,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(rotateAnim, {
           toValue: 0,
           duration: 0,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ])
     ).start();
@@ -85,12 +85,12 @@ export default function SplashScreen() {
             Animated.timing(anim, {
               toValue: 0.3,
               duration: 600,
-              useNativeDriver: true,
+              useNativeDriver: false,
             }),
             Animated.timing(anim, {
               toValue: 1,
               duration: 600,
-              useNativeDriver: true,
+              useNativeDriver: false,
             }),
           ]),
         ])
@@ -116,12 +116,12 @@ export default function SplashScreen() {
         Animated.timing(fadeAnim, {
           toValue: 0,
           duration: 300,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(scaleAnim, {
           toValue: 1.2,
           duration: 300,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ]).start(() => {
         if (onboardingCompleted) {

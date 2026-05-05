@@ -30,7 +30,6 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import BottomTabNavigation from '../navigation/BottomNavigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 
@@ -60,12 +59,12 @@ export default function HomeScreen() {
         Animated.timing(pulseAnim, {
           toValue: 1.05,
           duration: 1000,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(pulseAnim, {
           toValue: 1,
           duration: 1000,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ])
     );
@@ -77,12 +76,12 @@ export default function HomeScreen() {
         Animated.timing(notificationDot, {
           toValue: 1,
           duration: 500,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.timing(notificationDot, {
           toValue: 0.3,
           duration: 500,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ])
     );
@@ -294,7 +293,6 @@ export default function HomeScreen() {
           </View>
         </ScrollView>
 
-        <BottomTabNavigation />
       </View>
     </SafeAreaView>
   );

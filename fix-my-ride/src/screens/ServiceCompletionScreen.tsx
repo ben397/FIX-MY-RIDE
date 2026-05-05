@@ -91,12 +91,12 @@ export default function ServiceCompletionScreen() {
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(slideAnim, {
         toValue: 0,
         duration: 800,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
 
@@ -106,7 +106,7 @@ export default function ServiceCompletionScreen() {
       delay: 300,
       friction: 4,
       tension: 40,
-      useNativeDriver: true,
+      useNativeDriver: false,
     }).start();
   }, []);
 
@@ -118,12 +118,12 @@ export default function ServiceCompletionScreen() {
       Animated.timing(payButtonScale, {
         toValue: 0.95,
         duration: 150,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
       Animated.timing(payButtonScale, {
         toValue: 1,
         duration: 150,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }),
     ]).start();
 
